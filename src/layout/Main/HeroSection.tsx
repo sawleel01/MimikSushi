@@ -2,6 +2,7 @@
 
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { ArrowRight, Plus } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { useRef } from "react";
 
@@ -77,7 +78,7 @@ export default function SushiHero() {
       </div>
 
       {/* Main Hero Content */}
-      <div className="relative max-w-7xl mx-auto px-6 lg:px-8 py-25 lg:py-14 flex items-center">
+      <div className="relative max-w-7xl mx-auto px-6 lg:px-8 py-40 lg:py-14 flex items-center">
         <div className="w-full grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
           <motion.div style={{ scale, opacity }} className="space-y-8 z-10">
@@ -103,7 +104,7 @@ export default function SushiHero() {
                 className="font-['Noto_Serif_JP'] text-6xl md:text-7xl lg:text-8xl font-bold leading-none"
               >
                 <span className="block bg-linear-to-r from-[#1a1a1a] via-[#c41e3a] to-[#1a1a1a] bg-clip-text text-transparent animate-linear bg-size-[200%_auto]">
-                  SushiBar
+                  MimikSushi
                 </span>
               </motion.h1>
 
@@ -124,9 +125,7 @@ export default function SushiHero() {
               transition={{ duration: 0.8, delay: 0.7 }}
               className="text-lg md:text-xl text-[#4a5568] leading-relaxed max-w-xl"
             >
-              Embark on a culinary journey where master chefs transform the
-              finest seasonal ingredients into edible art. Each piece tells a
-              story of tradition, precision, and unparalleled craftsmanship.
+              Japanese cuisine with a Modern take
             </motion.p>
 
             {/* Buttons */}
@@ -136,17 +135,18 @@ export default function SushiHero() {
               transition={{ duration: 0.8, delay: 0.9 }}
               className="flex flex-wrap gap-4"
             >
-              <motion.button
+              <motion.a
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
+                href="https://order.toasttab.com/egiftcards/mimik-sushi-doncaster"
                 className="group relative bg-linear-to-r from-[#c41e3a] to-[#a01729] text-white px-8 py-4 rounded-full font-medium text-lg overflow-hidden shadow-xl shadow-[#c41e3a]/30 hover:shadow-2xl hover:shadow-[#c41e3a]/40 transition-all duration-300"
               >
                 <span className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
                 <span className="relative flex items-center gap-2">
-                  Reserve Your Table
+                  Gift Cards
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </span>
-              </motion.button>
+              </motion.a>
 
               <motion.button
                 whileHover={{ scale: 1.05, y: -2 }}
@@ -185,7 +185,7 @@ export default function SushiHero() {
               </div>
               <div className="text-center lg:text-left">
                 <div className="font-['Noto_Serif_JP'] text-3xl md:text-4xl font-bold text-[#2d5016]">
-                  2
+                  3
                 </div>
                 <div className="text-sm text-[#4a5568] mt-1">Locations</div>
               </div>
@@ -218,11 +218,16 @@ export default function SushiHero() {
                 className="absolute top-0 right-0 w-72 h-96 bg-white rounded-2xl shadow-2xl overflow-hidden border border-[#d4af37]/20"
               >
                 <div className="w-full h-full bg-linear-to-br from-[#c41e3a]/20 to-[#d4af37]/20 flex items-center justify-center">
-                  <div className="text-8xl">🍣</div>
+                  <Image
+                    src="/images/2.png"
+                    alt="Sushi Dish"
+                    fill
+                    className="object-cover rounded-lg"
+                  />
                 </div>
                 <div className="absolute bottom-0 left-0 right-0 bg-white/95 backdrop-blur-sm p-4 border-t border-[#d4af37]/20">
                   <h3 className="font-['Noto_Serif_JP'] text-xl font-bold text-[#1a1a1a]">
-                    Sushi B
+                    Sushi Platter
                   </h3>
                   <p className="text-sm text-[#4a5568]">
                     Traditional hand-pressed
@@ -245,11 +250,16 @@ export default function SushiHero() {
                 className="absolute top-32 left-0 w-64 h-80 bg-white rounded-2xl shadow-2xl overflow-hidden border border-[#c41e3a]/20"
               >
                 <div className="w-full h-full bg-linear-to-br from-[#d4af37]/20 to-[#2d5016]/20 flex items-center justify-center">
-                  <div className="text-7xl">🍱</div>
+                  <Image
+                    src="/images/12.png"
+                    alt="Sushi Dish"
+                    fill
+                    className="object-cover rounded-lg"
+                  />
                 </div>
                 <div className="absolute bottom-0 left-0 right-0 bg-white/95 backdrop-blur-sm p-4 border-t border-[#c41e3a]/20">
                   <h3 className="font-['Noto_Serif_JP'] text-xl font-bold text-[#1a1a1a]">
-                    Sushi A
+                    Sushi Platter
                   </h3>
                   <p className="text-sm text-[#4a5568]">
                     Chef&apos;s selection
@@ -272,11 +282,16 @@ export default function SushiHero() {
                 className="absolute bottom-0 right-16 w-56 h-72 bg-white rounded-2xl shadow-2xl overflow-hidden border border-[#2d5016]/20"
               >
                 <div className="w-full h-full bg-linear-to-br from-[#2d5016]/20 to-[#c41e3a]/20 flex items-center justify-center">
-                  <div className="text-6xl">🍶</div>
+                  <Image
+                    src="/images/13.png"
+                    alt="Sushi Dish"
+                    fill
+                    className="object-cover rounded-lg"
+                  />
                 </div>
                 <div className="absolute bottom-0 left-0 right-0 bg-white/95 backdrop-blur-sm p-4 border-t border-[#2d5016]/20">
                   <h3 className="font-['Noto_Serif_JP'] text-lg font-bold text-[#1a1a1a]">
-                    Drinks
+                    Sushi Combo
                   </h3>
                   <p className="text-sm text-[#4a5568]">Curated pairings</p>
                 </div>

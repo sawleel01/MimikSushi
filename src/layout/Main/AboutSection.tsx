@@ -1,33 +1,47 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { useRef } from "react";
 
-const aboutContent = [
+interface AboutContentProps {
+  id: number;
+  imageSrc?: string; // <-- new field
+  title: string;
+  description?: string;
+  descriptionPoints?: string[];
+  color: string;
+  bgGradient: string;
+}
+
+const aboutContent: AboutContentProps[] = [
   {
     id: 1,
-    emoji: "👨‍🍳",
-    title: "Master Craftsmanship",
+    imageSrc: "/images/mimik.png",
+    title: "Inclusive Indulgence",
     description:
-      "Our chefs have trained for decades in the traditional art of sushi making. Each piece is crafted with precision, honoring centuries-old techniques passed down through generations of master artisans.",
+      "Sushi and ramen shouldn’t be exclusive. Our curated menu breaks boundaries, offering bold flavors, artisanal ingredients, and inventive pairings that speak to every palate. Whether you’re a sushi purist or a curious first-timer, we invite you to explore a world where quality meets creativity.",
     color: "#c41e3a",
     bgGradient: "from-[#c41e3a]/20 via-[#d4af37]/10 to-[#c41e3a]/5",
   },
   {
     id: 2,
-    emoji: "🐟",
-    title: "Premium Ingredients",
+    imageSrc: "/images/9.png",
+    title: "Beyond the Plate",
     description:
-      "We source only the finest seasonal fish and ingredients, delivered fresh daily from Tokyo's renowned Tsukiji market. Quality is never compromised in our pursuit of perfection.",
+      "Dining here isn’t just a meal—it’s an immersive experience. From the moment you step in, our team of culinary artists (think master chefs, flavor alchemists, and hospitality pros) crafts moments designed to dazzle. Each dish is a harmony of precision and passion, plated to perfection and served with genuine warmth.",
     color: "#d4af37",
     bgGradient: "from-[#d4af37]/20 via-[#2d5016]/10 to-[#d4af37]/5",
   },
   {
     id: 3,
-    emoji: "🏮",
-    title: "Authentic Atmosphere",
-    description:
-      "Immerse yourself in a dining experience that transports you to the heart of Tokyo. Our intimate setting combines modern elegance with traditional Japanese aesthetics for an unforgettable journey.",
+    imageSrc: "/logo/MJMJ.png",
+    title: "Why Us?",
+    descriptionPoints: [
+      "Innovation Unleashed — Seasonal ingredients, unexpected textures, and visually stunning creations",
+      "Heart & Craft⁠ — Every roll, slice, and garnish is a labor of love.",
+      "Vibes that Welcome⁠ — A space where laughter flows as freely as our signature miso soup.",
+    ],
     color: "#2d5016",
     bgGradient: "from-[#2d5016]/20 via-[#c41e3a]/10 to-[#2d5016]/5",
   },
@@ -102,9 +116,10 @@ export default function AboutSection() {
               className="text-xl md:text-2xl text-[#4a5568] max-w-7xl mx-auto leading-relaxed"
             >
               Welcome to a fresh era of sushi craftsmanship—where tradition
-              meets innovation and every bite tells a story. We’re more than a
-              restaurant; we’re a culinary playground designed for adventurers,
-              connoisseurs, and those simply craving something extraordinary.
+              meets innovation and every bite tells a story. We&apos;re more
+              than a restaurant; we&apos;re a culinary playground designed for
+              adventurers, connoisseurs, and those simply craving something
+              extraordinary.
             </motion.p>
           </div>
         </div>
@@ -153,13 +168,11 @@ export default function AboutSection() {
                   <div className="relative bg-white rounded-3xl shadow-2xl overflow-hidden border border-[#d4af37]/20 aspect-4/5">
                     {/* Gradient background */}
                     <div
-                      className={`w-full h-full bg-linear-to-br ${item.bgGradient} flex items-center justify-center relative overflow-hidden`}
+                      className={`w-full h-full bg-linear-to-br ${item.bgGradient} relative overflow-hidden`}
                     >
                       {/* Animated shine effect */}
                       <motion.div
-                        animate={{
-                          x: ["-100%", "200%"],
-                        }}
+                        animate={{ x: ["-100%", "200%"] }}
                         transition={{
                           duration: 3,
                           repeat: Infinity,
@@ -169,21 +182,14 @@ export default function AboutSection() {
                         className="absolute inset-0 bg-linear-to-r from-transparent via-white/20 to-transparent skew-x-12"
                       />
 
-                      {/* Emoji with subtle animation */}
-                      <motion.div
-                        animate={{
-                          scale: [1, 1.05, 1],
-                          rotate: [0, 5, 0, -5, 0],
-                        }}
-                        transition={{
-                          duration: 4,
-                          repeat: Infinity,
-                          ease: "easeInOut",
-                        }}
-                        className="text-[200px] leading-none z-10"
-                      >
-                        {item.emoji}
-                      </motion.div>
+                      {item.imageSrc && (
+                        <Image
+                          src={item.imageSrc}
+                          alt={item.title}
+                          fill
+                          className="object-contain center-pointer"
+                        />
+                      )}
                     </div>
 
                     {/* Bottom label */}
@@ -283,6 +289,15 @@ export default function AboutSection() {
                 <p className="text-lg md:text-xl text-[#4a5568] leading-relaxed">
                   {item.description}
                 </p>
+                <ul className="list-disc list-outside pl-5 space-y-2 pt-2 text-lg marker:text-[#c41e3a]">
+                  {item.descriptionPoints?.map((point, i) => (
+                    <li key={i} className="text-[#1a1a1a]">
+                      <span className="block text-lg md:text-xl text-[#4a5568] leading-relaxed">
+                        {point}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
 
                 {/* Decorative elements */}
                 <div className="flex items-center gap-3 pt-4">

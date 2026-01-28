@@ -4,13 +4,25 @@ import { motion } from "framer-motion";
 import { Phone, Mail, MapPin, Clock, Send } from "lucide-react";
 import { useState } from "react";
 
-const contactInfo = [
+interface ContactInfoItem {
+  id: number;
+  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+  title: string;
+  info?: string;
+  info2?: string;
+  atconInfo?: string;
+  doncasterInfo?: string;
+  wakefieldInfo?: string;
+  color: string;
+  bgGradient: string;
+}
+
+const contactInfo: ContactInfoItem[] = [
   {
     id: 1,
     icon: Phone,
     title: "Phone Number",
-    atconInfo: "020 7167 8370",
-    doncasterInfo: "020 7167 8370",
+    info: "020 7167 8370",
     color: "#c41e3a",
     bgGradient: "from-[#c41e3a]/10 to-[#d4af37]/5",
   },
@@ -18,8 +30,8 @@ const contactInfo = [
     id: 2,
     icon: Mail,
     title: "Email Address",
-    atconInfo: " mimiksushi@gmail.com",
-    doncasterInfo: "info@mimikgroupuk.com",
+    info: "mimiksushi@gmail.com",
+    info2: "info@mimikgroupuk.com",
     color: "#d4af37",
     bgGradient: "from-[#d4af37]/10 to-[#2d5016]/5",
   },
@@ -29,6 +41,7 @@ const contactInfo = [
     title: "Our Location",
     atconInfo: "269 High St, London W3 9BT",
     doncasterInfo: "3 Wood Street, Doncaster DN1 3LH",
+    wakefieldInfo: "34 Northgate, Wakefield WF1 3AN",
     color: "#2d5016",
     bgGradient: "from-[#2d5016]/10 to-[#c41e3a]/5",
   },
@@ -52,7 +65,7 @@ export default function ContactSection() {
     message: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("Form submitted:", formData);
     // Handle form submission here
@@ -139,17 +152,18 @@ export default function ContactSection() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 pb-20">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 pb-20 space-y-10">
         {/* Contact Info Grid - 2x2 */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true, margin: "-100px" }}
-          className="grid md:grid-cols-2 gap-6 mb-20"
+          className="grid md:grid-cols-2 gap-6 mb-20 items-stretch"
         >
           {contactInfo.map((item, index) => {
             const Icon = item.icon;
+
             return (
               <motion.div
                 key={item.id}
@@ -157,8 +171,8 @@ export default function ContactSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true, margin: "-100px" }}
-                whileHover={{ y: -5, transition: { duration: 0.2 } }}
-                className="group relative"
+                whileHover={{ y: -5 }}
+                className="group relative h-full"
               >
                 {/* Decorative background blur */}
                 <motion.div
@@ -175,41 +189,95 @@ export default function ContactSection() {
                   className={`absolute inset-0 bg-linear-to-br ${item.bgGradient} rounded-2xl blur-xl`}
                 />
 
-                {/* Main card */}
-                <div className="relative bg-white rounded-2xl p-8 border-2 border-[#d4af37]/20 shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden">
-                  {/* Shine effect on hover */}
+                {/* Main card — MUST be h-full */}
+                <div className="relative h-full bg-white rounded-2xl p-8 border-2 border-[#d4af37]/20 shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden flex flex-col">
+                  {/* Shine effect */}
                   <motion.div className="absolute inset-0 bg-linear-to-r from-transparent via-white/10 to-transparent skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
 
-                  <div className="relative z-10 space-y-4">
-                    {/* Icon */}
-                    <motion.div
-                      whileHover={{ rotate: [0, -10, 10, 0] }}
-                      transition={{ duration: 0.5 }}
-                      className="w-16 h-16 rounded-full bg-linear-to-br from-[#c41e3a] to-[#a01729] flex items-center justify-center shadow-lg"
-                      style={{
-                        boxShadow: `0 0 30px ${item.color}40`,
-                      }}
-                    >
-                      <Icon className="w-8 h-8 text-white" />
-                    </motion.div>
+                  {/* Content — MUST fill height */}
+                  <div className="relative z-10 flex flex-col h-full justify-between">
+                    {/* Top content */}
+                    <div className="space-y-4">
+                      {/* Icon */}
+                      <motion.div
+                        whileHover={{ rotate: [0, -10, 10, 0] }}
+                        transition={{ duration: 0.5 }}
+                        className="w-16 h-16 rounded-full bg-linear-to-br from-[#c41e3a] to-[#a01729] flex items-center justify-center shadow-lg"
+                        style={{ boxShadow: `0 0 30px ${item.color}40` }}
+                      >
+                        <Icon className="w-8 h-8 text-white" />
+                      </motion.div>
 
-                    {/* Title */}
-                    <h3 className="font-['Noto_Serif_JP'] text-2xl font-bold text-[#1a1a1a]">
-                      {item.title}
-                    </h3>
+                      {/* Title */}
+                      <h3 className="font-['Noto_Serif_JP'] text-2xl font-bold text-[#1a1a1a]">
+                        {item.title}
+                      </h3>
 
-                    {/* Info */}
-                    <div className="space-y-1">
-                      <p className="text-lg font-medium text-[#1a1a1a]">
-                        Atcon: {item.atconInfo}
-                      </p>
-                      <p className="text-lg font-medium text-[#1a1a1a]">
-                        Doncaster: {item.doncasterInfo}
-                      </p>
+                      {/* Info */}
+                      <div className="space-y-1">
+                        {item.info && item.id === 1 && (
+                          <p className="text-lg font-medium text-[#1a1a1a]">
+                            <a
+                              href={`tel:${item.info.replace(/\s+/g, "")}`}
+                              className="hover:underline"
+                            >
+                              {item.info}
+                            </a>
+                          </p>
+                        )}
+
+                        {item.info && item.id === 2 && (
+                          <p className="text-lg font-medium text-[#1a1a1a]">
+                            {item.info.split(",").map((email, i) => (
+                              <span key={i}>
+                                <a
+                                  href={`mailto:${email.trim()}`}
+                                  className="hover:underline"
+                                >
+                                  {email.trim()}
+                                </a>
+                                {i !== item.info!.split(",").length - 1 && ", "}
+                              </span>
+                            ))}
+                          </p>
+                        )}
+                        {item.info2 && item.id === 2 && (
+                          <p className="text-lg font-medium text-[#1a1a1a]">
+                            {item.info2.split(",").map((email, i) => (
+                              <span key={i}>
+                                <a
+                                  href={`mailto:${email.trim()}`}
+                                  className="hover:underline"
+                                >
+                                  {email.trim()}
+                                </a>
+                                {i !== item.info2!.split(",").length - 1 &&
+                                  ", "}
+                              </span>
+                            ))}
+                          </p>
+                        )}
+
+                        {item.atconInfo && (
+                          <p className="text-lg font-medium text-[#1a1a1a]">
+                            Atcon: {item.atconInfo}
+                          </p>
+                        )}
+                        {item.doncasterInfo && (
+                          <p className="text-lg font-medium text-[#1a1a1a]">
+                            Doncaster: {item.doncasterInfo}
+                          </p>
+                        )}
+                        {item.wakefieldInfo && (
+                          <p className="text-lg font-medium text-[#1a1a1a]">
+                            Wakefield: {item.wakefieldInfo}
+                          </p>
+                        )}
+                      </div>
                     </div>
 
-                    {/* Decorative line */}
-                    <div className="flex items-center gap-2 pt-2">
+                    {/* Decorative line — always aligned */}
+                    <div className="flex items-center gap-2 pt-6">
                       <div className="w-2 h-2 bg-[#c41e3a] rounded-full" />
                       <div className="w-2 h-2 bg-[#d4af37] rounded-full" />
                       <div className="w-2 h-2 bg-[#2d5016] rounded-full" />
@@ -220,6 +288,59 @@ export default function ContactSection() {
               </motion.div>
             );
           })}
+        </motion.div>
+
+        {/* Maps */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          viewport={{ once: true, margin: "-100px" }}
+          className="relative"
+        >
+          <div className="grid grid-cols-3 gap-5">
+            <div className="bg-white p-5 rounded-2xl">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2483.2739344461925!2d-0.2784047236517047!3d51.5081901718134!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48760e0418f16fef%3A0xec579be6e1b559a8!2s269%20High%20St%2C%20London%20W3%209BT%2C%20UK!5e0!3m2!1sen!2snp!4v1769589099833!5m2!1sen!2snp"
+                className="w-full h-115 border-0 rounded-2xl"
+                loading="lazy"
+                allowFullScreen
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Atcon Location Map"
+              />
+              <h1 className="text-center mt-3 font-['Noto_Serif_JP'] text-2xl font-bold text-[#1a1a1a]">
+                Atcon Location
+              </h1>
+            </div>
+
+            <div className="bg-white p-5 rounded-2xl">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2371.986712601019!2d-1.1353408235172318!3d53.52229417234093!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48790dd1a01605d3%3A0x25f678584b25eb66!2s3%20Wood%20St%2C%20Doncaster%20DN1%203LH%2C%20UK!5e0!3m2!1sen!2snp!4v1769589298190!5m2!1sen!2snp"
+                className="w-full h-115 border-0 rounded-2xl"
+                loading="lazy"
+                allowFullScreen
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Donacaster Location Map"
+              />
+              <h1 className="text-center mt-3 font-['Noto_Serif_JP'] text-2xl font-bold text-[#1a1a1a]">
+                Doncaster Location
+              </h1>
+            </div>
+
+            <div className="bg-white p-5 rounded-2xl">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2362.913286010261!2d-1.5004722235062617!3d53.68417087238915!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487966fe1e2c9239%3A0x3ef2045eec4c15f7!2s34%20Northgate%2C%20Wakefield%20WF1%203AN%2C%20UK!5e0!3m2!1sen!2snp!4v1769596103012!5m2!1sen!2snp"
+                className="w-full h-115 border-0 rounded-2xl"
+                loading="lazy"
+                allowFullScreen
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Wakefield Location Map"
+              />
+              <h1 className="text-center mt-3 font-['Noto_Serif_JP'] text-2xl font-bold text-[#1a1a1a]">
+                Wakefield Location
+              </h1>
+            </div>
+          </div>
         </motion.div>
 
         {/* Contact Form */}
@@ -404,7 +525,6 @@ export default function ContactSection() {
         </motion.div>
       </div>
 
-      {/* Bottom linear overlay */}
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-linear-to-t from-[#e8e4d8] to-transparent pointer-events-none" />
     </div>
   );

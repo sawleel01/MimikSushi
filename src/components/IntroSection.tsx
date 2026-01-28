@@ -5,9 +5,9 @@ import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { ArrowDown } from "lucide-react";
 
 type IntroSectionProps = {
-  subtitle: string;
+  subtitle?: string;
   title: string;
-  description: string;
+  description?: string;
 };
 
 export default function IntroSection({

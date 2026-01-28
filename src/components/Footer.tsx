@@ -2,34 +2,37 @@
 
 import { motion } from "framer-motion";
 import { Variants } from "framer-motion";
+import { Instagram, Facebook, Music2 } from "lucide-react";
 
 const footerLinks = {
-  menu: [
-    { name: "Sushi", href: "#" },
-    { name: "Drinks", href: "#" },
-    { name: "Desserts", href: "#" },
-  ],
-  locations: [
-    { name: "A", href: "#" },
-    { name: "B", href: "#" },
-  ],
+  locations: [{ name: "Acton" }, { name: "Doncaster" }, { name: "Wakefield" }],
   company: [
-    { name: "About Us", href: "#" },
-    { name: "Our Chefs", href: "#" },
-    { name: "Menu", href: "#" },
-    { name: "Contact", href: "#" },
+    { name: "Menu", href: "/menu" },
+    { name: "Our Gallery", href: "/gallery" },
+    { name: "Contact", href: "/contact" },
   ],
   legal: [
-    { name: "Privacy Policy", href: "#" },
-    { name: "Terms of Service", href: "#" },
+    { name: "Privacy Policy", href: "/legal/privacy-policy" },
+    { name: "Terms of Service", href: "/legal/terms-and-conditions" },
   ],
 };
 
 const socialLinks = [
-  { name: "Instagram", icon: "I", href: "#" },
-  { name: "Facebook", icon: "F", href: "#" },
-  { name: "Twitter", icon: "X", href: "#" },
-  { name: "TikTok", icon: "T", href: "#" },
+  {
+    name: "Instagram",
+    icon: Instagram,
+    href: "https://www.instagram.com/mimiksushi_acton/",
+  },
+  {
+    name: "Facebook",
+    icon: Facebook,
+    href: "https://www.facebook.com/profile.php?id=100083613935638",
+  },
+  {
+    name: "TikTok",
+    icon: Music2,
+    href: "https://www.tiktok.com/@mimiksushi_acton",
+  },
 ];
 
 export default function Footer() {
@@ -67,14 +70,14 @@ export default function Footer() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-9 gap-12 lg:gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-7 gap-12 lg:gap-8"
         >
           {/* Brand Section */}
           <motion.div variants={itemVariants} className="lg:col-span-3">
             <div className="space-y-6">
               <div>
                 <h2 className="font-['Noto_Serif_JP'] text-3xl md:text-4xl font-bold text-[#f8f6f0] tracking-wide mb-2">
-                  Sushibar
+                  Mimik Sushi
                 </h2>
                 <p className="text-[#d4af37] text-sm font-medium tracking-wider">
                   Authentic Japanese Sushi Bar
@@ -89,41 +92,27 @@ export default function Footer() {
 
               {/* Social Links */}
               <div className="flex gap-3">
-                {socialLinks.map((social) => (
-                  <motion.a
-                    key={social.name}
-                    href={social.href}
-                    whileHover={{ scale: 1.1, y: -2 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="w-12 h-12 bg-white/5 hover:bg-white/10 rounded-full flex items-center justify-center text-xl transition-colors duration-300 border border-white/10 hover:border-[#d4af37]/50 group relative overflow-hidden"
-                    aria-label={social.name}
-                  >
-                    <span className="absolute inset-0 bg-linear-to-br from-[#c41e3a]/20 to-[#d4af37]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    <span className="relative">{social.icon}</span>
-                  </motion.a>
-                ))}
+                {socialLinks.map((social) => {
+                  const Icon = social.icon;
+
+                  return (
+                    <motion.a
+                      key={social.name}
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      whileHover={{ scale: 1.1, y: -2 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="w-12 h-12 bg-white/5 hover:bg-white/10 rounded-full flex items-center justify-center transition-colors duration-300 border border-white/10 hover:border-[#d4af37]/50 group relative overflow-hidden"
+                      aria-label={social.name}
+                    >
+                      <span className="absolute inset-0 bg-linear-to-br from-[#c41e3a]/20 to-[#d4af37]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      <Icon className="relative w-5 h-5" />
+                    </motion.a>
+                  );
+                })}
               </div>
             </div>
-          </motion.div>
-
-          {/* Menu Links */}
-          <motion.div variants={itemVariants} className="lg:col-span-2">
-            <h3 className="font-['Noto_Serif_JP'] text-lg font-semibold mb-4 text-[#d4af37]">
-              Menu
-            </h3>
-            <ul className="space-y-3">
-              {footerLinks.menu.map((link) => (
-                <li key={link.name}>
-                  <a
-                    href={link.href}
-                    className="text-[#a8a8a8] hover:text-[#f8f6f0] transition-colors duration-300 text-sm group inline-flex items-center"
-                  >
-                    <span className="w-0 h-px bg-[#d4af37] group-hover:w-4 transition-all duration-300 mr-0 group-hover:mr-2" />
-                    {link.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
           </motion.div>
 
           {/* Locations */}
@@ -134,13 +123,10 @@ export default function Footer() {
             <ul className="space-y-3">
               {footerLinks.locations.map((link) => (
                 <li key={link.name}>
-                  <a
-                    href={link.href}
-                    className="text-[#a8a8a8] hover:text-[#f8f6f0] transition-colors duration-300 text-sm group inline-flex items-center"
-                  >
+                  <div className="text-[#a8a8a8] hover:text-[#f8f6f0] transition-colors duration-300 text-sm group inline-flex items-center cursor-pointer">
                     <span className="w-0 h-px bg-[#d4af37] group-hover:w-4 transition-all duration-300 mr-0 group-hover:mr-2" />
                     {link.name}
-                  </a>
+                  </div>
                 </li>
               ))}
             </ul>
@@ -201,7 +187,10 @@ export default function Footer() {
           </div>
 
           <div className="text-xs text-[#a8a8a8] text-center md:text-right">
-            <p>© {new Date().getFullYear()} Sushi Bar. All rights reserved.</p>
+            <p>
+              © {new Date().getFullYear()} Sushi Bar. All rights reserved by
+              Rabtik Limited.
+            </p>
             <p className="mt-1 text-[#d4af37]/60"></p>
           </div>
         </motion.div>

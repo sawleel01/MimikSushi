@@ -6,7 +6,7 @@ export default function ContactUs() {
     <>
       <IntroSection
         title="Contact Us"
-        description="Have anyy queries or nedd any support reach us"
+        description="We'd love to hear from you. Reach out for reservations or inquiries"
         subtitle="Get In Touch"
       />
       <ContactSection />
