@@ -123,9 +123,7 @@ export default function ContactSection() {
                 viewport={{ once: true }}
                 className="font-['Noto_Serif_JP'] text-6xl md:text-7xl lg:text-8xl font-bold leading-none"
               >
-                <span className="bg-linear-to-r from-[#1a1a1a] via-[#c41e3a] to-[#1a1a1a] bg-clip-text text-transparent">
-                  Contact Us
-                </span>
+                <span style={{ color: "#ff626d" }}>Contact Us</span>
               </motion.h2>
 
               <motion.div
@@ -202,8 +200,8 @@ export default function ContactSection() {
                       <motion.div
                         whileHover={{ rotate: [0, -10, 10, 0] }}
                         transition={{ duration: 0.5 }}
-                        className="w-16 h-16 rounded-full bg-linear-to-br from-[#c41e3a] to-[#a01729] flex items-center justify-center shadow-lg"
-                        style={{ boxShadow: `0 0 30px ${item.color}40` }}
+                        className="w-16 h-16 rounded-full flex items-center justify-center shadow-lg"
+                        style={{ backgroundColor: "#ff626d" }}
                       >
                         <Icon className="w-8 h-8 text-white" />
                       </motion.div>
@@ -469,7 +467,8 @@ export default function ContactSection() {
                   type="submit"
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.95 }}
-                  className="group relative bg-linear-to-r from-[#c41e3a] to-[#a01729] text-white px-10 py-4 rounded-full font-medium text-lg overflow-hidden shadow-xl shadow-[#c41e3a]/30 hover:shadow-2xl hover:shadow-[#c41e3a]/40 transition-all duration-300"
+                  className="group relative text-white px-10 py-4 rounded-full font-medium text-lg overflow-hidden shadow-xl shadow-[#c41e3a]/30 hover:shadow-2xl hover:shadow-[#c41e3a]/40 transition-all duration-300"
+                  style={{ backgroundColor: "#ff626d" }}
                 >
                   <span className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
                   <span className="relative flex items-center gap-2">

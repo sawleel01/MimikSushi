@@ -54,7 +54,8 @@ export default function IntroSection({
         className="relative h-screen flex items-center justify-center overflow-hidden"
       >
         {/* Background  */}
-        <div className="absolute inset-0 bg-linear-to-br from-[#1a1a1a] via-[#0a0a0a] to-[#2d1810]">
+        <div className="absolute inset-0 bg-linear-to-t from-[#1a1a1a] via-[#0a0a0a] to-[#2d1810]">
+          {/* Animated radial lights */}
           <motion.div
             animate={{
               backgroundPosition: ["0% 0%", "100% 100%"],
@@ -67,9 +68,15 @@ export default function IntroSection({
             className="absolute inset-0 opacity-30"
             style={{
               backgroundImage:
-                "radial-linear(circle at 20% 50%, rgba(196, 30, 58, 0.15) 0%, transparent 50%), radial-linear(circle at 80% 80%, rgba(212, 175, 55, 0.15) 0%, transparent 50%)",
+                "radial-gradient(circle at 20% 50%, rgba(196, 30, 58, 0.15) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(212, 175, 55, 0.15) 0%, transparent 50%)",
               backgroundSize: "200% 200%",
             }}
+          />
+
+          {/* TOP OVERLAY — fixes logo visibility */}
+          <div
+            className="absolute top-0 left-0 right-0 h-32
+               bg-linear-to-b from-black/85 via-black/45 to-transparent"
           />
         </div>
 

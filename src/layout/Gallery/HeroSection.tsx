@@ -84,10 +84,7 @@ export default function GalleryHero() {
           </motion.div>
 
           <h2 className="font-['Noto_Serif_JP'] text-5xl md:text-6xl lg:text-7xl font-bold text-[#1a1a1a] mb-6">
-            Culinary{" "}
-            <span className="bg-linear-to-r from-[#c41e3a] to-[#d4af37] bg-clip-text text-transparent">
-              Masterpieces
-            </span>
+            Culinary <span style={{ color: "#ff626d" }}>Masterpieces</span>
           </h2>
 
           <p className="text-lg md:text-xl text-[#4a5568] max-w-2xl mx-auto leading-relaxed">
@@ -161,7 +158,7 @@ export default function GalleryHero() {
                 onClick={() => setPage(i)}
                 className={`w-12 h-12 rounded-full font-['Noto_Serif_JP'] font-semibold transition-all duration-300 ${
                   page === i
-                    ? "bg-linear-to-r from-[#c41e3a] to-[#a01729] text-white shadow-lg shadow-[#c41e3a]/30 scale-110"
+                    ? "bg-black text-white shadow-lg shadow-[#c41e3a]/30 scale-110"
                     : "bg-white text-[#1a1a1a] hover:bg-[#f8f6f0] shadow-md hover:shadow-lg"
                 }`}
               >

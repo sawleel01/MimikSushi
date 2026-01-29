@@ -152,7 +152,7 @@ export default function Navbar() {
                 damping: 25,
                 stiffness: 200,
               }}
-              className="fixed right-0 top-0 bottom-0 z-70 w-full max-w-md bg-[#f8f6f0] shadow-2xl"
+              className="fixed right-0 top-0 bottom-0 z-70 w-full max-w-md bg-white shadow-2xl"
             >
               <div className="h-full flex flex-col">
                 {/* Header */}
@@ -186,7 +186,7 @@ export default function Navbar() {
                       initial={{ opacity: 0, x: -30 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: 0.1 + index * 0.1 }}
-                      className="block w-full bg-white border-2 border-transparent hover:border-[#d4af37] rounded-sm p-6 text-left transition-all duration-300 hover:translate-x-2 hover:shadow-lg group relative overflow-hidden"
+                      className="block w-full bg-white border-2 border-black/50 hover:border-[#d4af37] rounded-sm p-6 text-left transition-all duration-300 hover:translate-x-2 hover:shadow-lg group relative overflow-hidden"
                     >
                       <div className="absolute inset-0 bg-linear-to-r from-transparent via-[#d4af37]/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-500" />
                       <div className="flex items-center gap-4">
@@ -233,7 +233,7 @@ export default function Navbar() {
         }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           isScrolled
-            ? "bg-[#f8f6f0]/95 backdrop-blur-xl border-b border-black/10 shadow-sm"
+            ? "bg-white backdrop-blur-xl border-b border-black/10 shadow-sm"
             : "bg-transparent"
         }`}
       >
@@ -301,7 +301,7 @@ export default function Navbar() {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   onClick={() => setShowBranchModal(true)}
-                  className="hidden md:flex items-center gap-3 bg-white border-2 border-transparent hover:border-[#d4af37] rounded-full px-4 py-2 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md relative overflow-hidden group"
+                  className="hidden md:flex items-center gap-3 bg-white border-2 border-black hover:border-[#d4af37] rounded-full px-4 py-2 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md relative overflow-hidden group"
                 >
                   <div className="absolute inset-0 bg-linear-to-br from-[#c41e3a]/10 to-[#d4af37]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   <span className="text-xl">📍</span>
@@ -346,7 +346,8 @@ export default function Navbar() {
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.15 }}
                     onClick={() => setIsBookingPanelOpen(true)}
-                    className="bg-linear-to-br from-[#c41e3a] to-[#a01729] text-white px-7 py-3 rounded-full font-medium tracking-wider transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-[#c41e3a]/30 relative overflow-hidden group"
+                    className="text-white px-7 py-3 rounded-full font-medium tracking-wider transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-[#c41e3a]/30 relative overflow-hidden group"
+                    style={{ backgroundColor: "#ff626d" }}
                   >
                     <span className="absolute inset-0 bg-white/20 rounded-full scale-0 group-hover:scale-100 transition-transform duration-500" />
                     <span className="relative">Book Now</span>
@@ -441,7 +442,8 @@ export default function Navbar() {
                     setIsBookingPanelOpen(true);
                     setIsMobileMenuOpen(false);
                   }}
-                  className="block w-full text-center bg-linear-to-br from-[#c41e3a] to-[#a01729] text-white px-7 py-3 rounded-full font-medium tracking-wider transition-all duration-300 hover:shadow-lg hover:shadow-[#c41e3a]/30 mt-4"
+                  className="block w-full text-center text-white px-7 py-3 rounded-full font-medium tracking-wider transition-all duration-300 hover:shadow-lg hover:shadow-[#c41e3a]/30 mt-4"
+                  style={{ backgroundColor: "#ff626d" }}
                 >
                   Book Now
                 </motion.button>

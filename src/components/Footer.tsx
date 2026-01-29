@@ -62,7 +62,10 @@ export default function Footer() {
   return (
     <footer className="relative bg-linear-to-br from-[#1a1a1a] to-[#2d2d2d] text-[#f8f6f0] overflow-hidden">
       {/* Decorative Top Border */}
-      <div className="absolute top-0 left-0 right-0 h-1 bg-linear-to-r from-[#c41e3a] via-[#d4af37] to-[#c41e3a]" />
+      <div
+        className="absolute top-0 left-0 right-0 h-1"
+        style={{ backgroundColor: "#ff626d" }}
+      />
 
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8 pt-16 pb-8">
         <motion.div
@@ -197,7 +200,10 @@ export default function Footer() {
       </div>
 
       {/* Decorative Bottom Element */}
-      <div className="absolute bottom-0 left-0 right-0 h-2 bg-linear-to-r from-[#c41e3a] via-[#d4af37] to-[#c41e3a] opacity-50" />
+      <div
+        className="absolute bottom-0 left-0 right-0 h-1 opacity-50"
+        style={{ backgroundColor: "#ff626d" }}
+      />
     </footer>
   );
 }

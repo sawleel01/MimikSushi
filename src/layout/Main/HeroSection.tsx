@@ -56,10 +56,7 @@ export default function SushiHero() {
   );
 
   return (
-    <div
-      ref={heroRef}
-      className="relative min-h-screen bg-linear-to-br from-[#f8f6f0] to-[#e8e4d8]"
-    >
+    <div ref={heroRef} className="relative min-h-screen bg-white">
       {/* Background Decorative Elements */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Animated circles */}
@@ -103,7 +100,10 @@ export default function SushiHero() {
                 transition={{ duration: 0.8, delay: 0.3 }}
                 className="font-['Noto_Serif_JP'] text-6xl md:text-7xl lg:text-8xl font-bold leading-none"
               >
-                <span className="block bg-linear-to-r from-[#1a1a1a] via-[#c41e3a] to-[#1a1a1a] bg-clip-text text-transparent animate-linear bg-size-[200%_auto]">
+                <span
+                  className="block bg-black bg-clip-text  animate-linear bg-size-[200%_auto] "
+                  style={{ color: "#ff626d" }}
+                >
                   MimikSushi
                 </span>
               </motion.h1>
@@ -139,9 +139,9 @@ export default function SushiHero() {
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
                 href="https://order.toasttab.com/egiftcards/mimik-sushi-doncaster"
-                className="group relative bg-linear-to-r from-[#c41e3a] to-[#a01729] text-white px-8 py-4 rounded-full font-medium text-lg overflow-hidden shadow-xl shadow-[#c41e3a]/30 hover:shadow-2xl hover:shadow-[#c41e3a]/40 transition-all duration-300"
+                className="group relative text-white px-8 py-4 rounded-full font-medium text-lg transition-all duration-300"
+                style={{ backgroundColor: "#ff626d" }}
               >
-                <span className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
                 <span className="relative flex items-center gap-2">
                   Gift Cards
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />

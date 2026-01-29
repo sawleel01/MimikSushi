@@ -29,7 +29,7 @@ const aboutContent: AboutContentProps[] = [
     imageSrc: "/images/9.png",
     title: "Beyond the Plate",
     description:
-      "Dining here isn’t just a meal—it’s an immersive experience. From the moment you step in, our team of culinary artists (think master chefs, flavor alchemists, and hospitality pros) crafts moments designed to dazzle. Each dish is a harmony of precision and passion, plated to perfection and served with genuine warmth.",
+      "Dining here isn’t just a meal it’s an immersive experience. From the moment you step in, our team of culinary artists (think master chefs, flavor alchemists, and hospitality pros) crafts moments designed to dazzle. Each dish is a harmony of precision and passion, plated to perfection and served with genuine warmth.",
     color: "#d4af37",
     bgGradient: "from-[#d4af37]/20 via-[#2d5016]/10 to-[#d4af37]/5",
   },
@@ -38,9 +38,9 @@ const aboutContent: AboutContentProps[] = [
     imageSrc: "/logo/MJMJ.png",
     title: "Why Us?",
     descriptionPoints: [
-      "Innovation Unleashed — Seasonal ingredients, unexpected textures, and visually stunning creations",
-      "Heart & Craft⁠ — Every roll, slice, and garnish is a labor of love.",
-      "Vibes that Welcome⁠ — A space where laughter flows as freely as our signature miso soup.",
+      "Innovation Unleashed - Seasonal ingredients, unexpected textures, and visually stunning creations",
+      "Heart & Craft⁠ - Every roll, slice, and garnish is a labor of love.",
+      "Vibes that Welcome⁠ - A space where laughter flows as freely as our signature miso soup.",
     ],
     color: "#2d5016",
     bgGradient: "from-[#2d5016]/20 via-[#c41e3a]/10 to-[#2d5016]/5",
@@ -93,9 +93,7 @@ export default function AboutSection() {
                 viewport={{ once: true }}
                 className="font-['Noto_Serif_JP'] text-6xl md:text-7xl lg:text-8xl font-bold leading-none"
               >
-                <span className="bg-linear-to-r from-[#1a1a1a] via-[#c41e3a] to-[#1a1a1a] bg-clip-text text-transparent">
-                  About Us
-                </span>
+                <span style={{ color: "#ff626d" }}>About Us</span>
               </motion.h2>
 
               <motion.div
@@ -115,7 +113,7 @@ export default function AboutSection() {
               viewport={{ once: true }}
               className="text-xl md:text-2xl text-[#4a5568] max-w-7xl mx-auto leading-relaxed"
             >
-              Welcome to a fresh era of sushi craftsmanship—where tradition
+              Welcome to a fresh era of sushi craftsmanship where tradition
               meets innovation and every bite tells a story. We&apos;re more
               than a restaurant; we&apos;re a culinary playground designed for
               adventurers, connoisseurs, and those simply craving something
@@ -167,9 +165,7 @@ export default function AboutSection() {
                   {/* Main card */}
                   <div className="relative bg-white rounded-3xl shadow-2xl overflow-hidden border border-[#d4af37]/20 aspect-4/5">
                     {/* Gradient background */}
-                    <div
-                      className={`w-full h-full bg-linear-to-br ${item.bgGradient} relative overflow-hidden`}
-                    >
+                    <div className={`w-full h-full relative overflow-hidden`}>
                       {/* Animated shine effect */}
                       <motion.div
                         animate={{ x: ["-100%", "200%"] }}
@@ -194,36 +190,13 @@ export default function AboutSection() {
 
                     {/* Bottom label */}
                     <div className="absolute bottom-0 left-0 right-0 bg-white/95 backdrop-blur-sm p-6 border-t border-[#d4af37]/20">
-                      <div className="flex items-center justify-between">
+                      <div className="flex items-center justify-center">
                         <span className="font-['Noto_Serif_JP'] text-2xl font-bold text-[#1a1a1a]">
                           {item.title}
-                        </span>
-                        <span className="text-sm font-medium px-3 py-1 rounded-full bg-linear-to-r from-[#c41e3a] to-[#a01729] text-white">
-                          0{item.id}
                         </span>
                       </div>
                     </div>
                   </div>
-
-                  {/* Floating decorative elements */}
-                  <motion.div
-                    animate={{ rotate: 360 }}
-                    transition={{
-                      duration: 20,
-                      repeat: Infinity,
-                      ease: "linear",
-                    }}
-                    className="absolute -top-8 -right-8 w-28 h-28 border-2 border-[#d4af37]/40 rounded-full"
-                  />
-                  <motion.div
-                    animate={{ rotate: -360 }}
-                    transition={{
-                      duration: 15,
-                      repeat: Infinity,
-                      ease: "linear",
-                    }}
-                    className="absolute -bottom-6 -left-6 w-20 h-20 border-2 border-[#c41e3a]/30 rounded-full"
-                  />
                 </div>
               </motion.div>
 
@@ -251,7 +224,7 @@ export default function AboutSection() {
                       ease: "easeInOut",
                     }}
                     viewport={{ once: false }}
-                    className="w-20 h-20 rounded-full bg-linear-to-br from-[#c41e3a] to-[#a01729] flex items-center justify-center shadow-xl relative overflow-hidden"
+                    className="w-20 h-20 rounded-full bg-black flex items-center justify-center shadow-xl relative overflow-hidden"
                   >
                     {/* Shine effect */}
                     <motion.div
@@ -265,9 +238,6 @@ export default function AboutSection() {
                       }}
                       className="absolute inset-0 bg-linear-to-r from-transparent via-white/30 to-transparent skew-x-12"
                     />
-                    <span className="font-['Noto_Serif_JP'] text-3xl font-bold text-white relative z-10">
-                      0{item.id}
-                    </span>
                   </motion.div>
                   <motion.div
                     initial={{ scaleX: 0 }}
