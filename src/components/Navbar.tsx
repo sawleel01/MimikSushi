@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { X } from "lucide-react";
 import Image from "next/image";
+import { useLocation } from "./LocationContext";
 
 const branches = [
   { name: "Acton", location: "Acton" },
@@ -13,7 +14,7 @@ const branches = [
 ];
 
 export default function Navbar() {
-  const [selectedBranch, setSelectedBranch] = useState("");
+  const { location: selectedBranch, setLocation } = useLocation();
   const [showBranchModal, setShowBranchModal] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isBookingPanelOpen, setIsBookingPanelOpen] = useState(false);
@@ -45,8 +46,16 @@ export default function Navbar() {
     const visited = sessionStorage.getItem("hasVisited");
     const savedBranch = sessionStorage.getItem("selectedBranch");
 
-    if (savedBranch) {
-      setSelectedBranch(savedBranch);
+    // Load saved branch into context
+    if (
+      savedBranch &&
+      (savedBranch === "Acton" ||
+        savedBranch === "Doncaster" ||
+        savedBranch === "Wakefield")
+    ) {
+      setLocation(
+        savedBranch.toLowerCase() as "acton" | "doncaster" | "wakefield",
+      );
     }
 
     if (!visited) {
@@ -63,13 +72,21 @@ export default function Navbar() {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [setLocation]);
 
   const handleBranchSelect = (branchName: string) => {
-    setSelectedBranch(branchName);
+    // Update context
+    setLocation(
+      branchName.toLowerCase() as "acton" | "doncaster" | "wakefield",
+    );
+    // Save to sessionStorage
     sessionStorage.setItem("selectedBranch", branchName);
     setShowBranchModal(false);
   };
+
+  // Capitalize first letter for display
+  const displayBranch =
+    selectedBranch.charAt(0).toUpperCase() + selectedBranch.slice(1);
 
   return (
     <>
@@ -272,17 +289,6 @@ export default function Navbar() {
                     }`}
                   />
                 </div>
-                {/* {selectedBranch && (
-                  <span
-                    className={`font-serif font-semibold tracking-wider transition-all duration-500 ${
-                      isScrolled
-                        ? "hidden"
-                        : "text-xs text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] mt-1.5"
-                    }`}
-                  >
-                    {selectedBranch}
-                  </span>
-                )} */}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-linear-to-r from-[#c41e3a] to-[#d4af37] group-hover:w-full transition-all duration-500" />
               </Link>
 
@@ -310,7 +316,7 @@ export default function Navbar() {
                       Location
                     </span>
                     <span className="font-serif text-sm font-semibold text-[#1a1a1a]">
-                      {selectedBranch || "Select"}
+                      {displayBranch}
                     </span>
                   </div>
                 </motion.button>
@@ -412,7 +418,7 @@ export default function Navbar() {
                       Location
                     </span>
                     <span className="font-serif text-sm font-semibold text-[#1a1a1a]">
-                      {selectedBranch || "Select Location"}
+                      {displayBranch}
                     </span>
                   </div>
                 </button>

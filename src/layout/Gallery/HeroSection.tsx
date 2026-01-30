@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Variants } from "framer-motion";
 import Image from "next/image";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import { useLocation } from "@/components/LocationContext";
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -29,31 +30,74 @@ const itemVariants: Variants = {
   },
 };
 
-const IMAGES = [
-  "/images/1.png",
-  "/images/2.png",
-  "/images/3.png",
-  "/images/4.png",
-  "/images/5.png",
-  "/images/6.png",
-  "/images/7.png",
-  "/images/8.png",
-  "/images/9.png",
-  "/images/10.png",
-  "/images/11.png",
-  "/images/12.png",
-  "/images/13.png",
-];
+const GALLERY_IMAGES = {
+  acton: [
+    "/images/acton/1.png",
+    "/images/acton/2.png",
+    "/images/acton/3.png",
+    "/images/acton/4.png",
+    "/images/acton/5.png",
+    "/images/acton/6.png",
+    "/images/acton/7.png",
+    "/images/acton/8.png",
+    "/images/acton/9.png",
+    "/images/acton/10.png",
+    "/images/acton/11.png",
+    "/images/acton/12.png",
+    "/images/acton/13.png",
+  ],
+  doncaster: [
+    "/images/doncaster/1.png",
+    "/images/doncaster/2.png",
+    "/images/doncaster/3.png",
+    "/images/doncaster/4.png",
+    "/images/doncaster/5.png",
+    "/images/doncaster/6.png",
+    "/images/doncaster/7.png",
+    "/images/doncaster/8.png",
+    "/images/doncaster/9.png",
+    "/images/doncaster/10.png",
+    "/images/doncaster/11.png",
+    "/images/doncaster/12.png",
+    "/images/doncaster/13.png",
+  ],
+  wakefield: [
+    "/images/wakefield/1.png",
+    "/images/wakefield/2.png",
+    "/images/wakefield/3.png",
+    "/images/wakefield/4.png",
+    "/images/wakefield/5.png",
+    "/images/wakefield/6.png",
+    "/images/wakefield/7.png",
+    "/images/wakefield/8.png",
+    "/images/wakefield/9.png",
+    "/images/wakefield/10.png",
+    "/images/wakefield/11.png",
+    "/images/wakefield/12.png",
+    "/images/wakefield/13.png",
+  ],
+};
 
 const PER_PAGE = 6;
 
 export default function GalleryHero() {
+  const { location } = useLocation();
   const [page, setPage] = useState(0);
   const [activeImage, setActiveImage] = useState<string | null>(null);
+
+  // Get images for the current location
+  const IMAGES = GALLERY_IMAGES[location] || GALLERY_IMAGES.doncaster;
 
   const start = page * PER_PAGE;
   const currentImages = IMAGES.slice(start, start + PER_PAGE);
   const totalPages = Math.ceil(IMAGES.length / PER_PAGE);
+
+  const handleLocationChange = () => {
+    setPage(0);
+  };
+
+  // Location display name
+  const locationName = location.charAt(0).toUpperCase() + location.slice(1);
 
   return (
     <section className="relative py-24 lg:py-32 bg-[#f8f6f0] overflow-hidden">
@@ -79,7 +123,7 @@ export default function GalleryHero() {
           >
             <span className="w-2 h-2 bg-[#c41e3a] rounded-full animate-pulse" />
             <span className="text-sm font-medium text-[#1a1a1a] tracking-wider uppercase">
-              Our Gallery
+              {locationName} Gallery
             </span>
           </motion.div>
 
@@ -88,8 +132,8 @@ export default function GalleryHero() {
           </h2>
 
           <p className="text-lg md:text-xl text-[#4a5568] max-w-2xl mx-auto leading-relaxed">
-            Discover the artistry behind every dish in our carefully curated
-            collection
+            Discover the artistry behind every dish at our {locationName}{" "}
+            location
           </p>
         </motion.div>
 
@@ -98,7 +142,7 @@ export default function GalleryHero() {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          key={page}
+          key={`${location}-${page}`} // Re-animate when location or page changes
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12"
         >
           {currentImages.map((img) => (
@@ -111,7 +155,7 @@ export default function GalleryHero() {
             >
               <Image
                 src={img}
-                alt="Gallery image"
+                alt={`${locationName} gallery image`}
                 fill
                 className="object-cover group-hover:scale-110 transition-transform duration-500"
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
@@ -121,6 +165,17 @@ export default function GalleryHero() {
               {/* Corner Decorations */}
               <div className="absolute top-3 left-3 w-8 h-8 border-t-2 border-l-2 border-white/40 rounded-tl-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <div className="absolute bottom-3 right-3 w-8 h-8 border-b-2 border-r-2 border-white/40 rounded-br-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+              {/* Location Badge */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                className="absolute top-3 right-3 bg-black/50 backdrop-blur-sm px-3 py-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              >
+                <span className="text-white text-xs font-medium">
+                  {locationName}
+                </span>
+              </motion.div>
             </motion.div>
           ))}
         </motion.div>
@@ -193,7 +248,7 @@ export default function GalleryHero() {
         >
           <p className="text-sm text-[#4a5568]">
             Showing {start + 1}-{Math.min(start + PER_PAGE, IMAGES.length)} of{" "}
-            {IMAGES.length} images
+            {IMAGES.length} images from {locationName}
           </p>
         </motion.div>
       </div>
@@ -232,7 +287,7 @@ export default function GalleryHero() {
 
             <motion.img
               src={activeImage}
-              alt="Gallery preview"
+              alt={`${locationName} gallery preview`}
               initial={{ scale: 0.8, opacity: 0, y: 50 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.8, opacity: 0, y: 50 }}
@@ -240,6 +295,16 @@ export default function GalleryHero() {
               className="max-w-full max-h-[90vh] rounded-3xl shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             />
+
+            {/* Location Badge in Modal */}
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="absolute top-20 left-1/2 -translate-x-1/2 bg-white/10 backdrop-blur-md px-6 py-2 rounded-full border border-white/20"
+            >
+              <span className="text-white font-medium">{locationName}</span>
+            </motion.div>
 
             {/* Keyboard Hints */}
             <motion.div

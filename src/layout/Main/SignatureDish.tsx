@@ -26,7 +26,7 @@ const dishes: Dish[] = [
     id: 2,
     name: "Signature Sashimi Platter",
     description: "Premium sashimi selection",
-    image: "/images/3.png",
+    image: "/images/4.png",
 
     category: "sashimi",
   },
@@ -34,7 +34,7 @@ const dishes: Dish[] = [
     id: 3,
     name: "Dragon Roll",
     description: "Eel, avocado, cucumber",
-    image: "/images/3.png",
+    image: "/images/5.png",
 
     category: "rolls",
   },
@@ -42,7 +42,7 @@ const dishes: Dish[] = [
     id: 4,
     name: "Tempura Selection",
     description: "Crispy tempura with yuzu mayo",
-    image: "/images/3.png",
+    image: "/images/6.png",
 
     category: "hot dishes",
   },
@@ -50,7 +50,7 @@ const dishes: Dish[] = [
     id: 5,
     name: "Wagyu Beef Tataki",
     description: "Seared wagyu with ponzu",
-    image: "/images/3.png",
+    image: "/images/7.png",
 
     category: "signature",
   },
