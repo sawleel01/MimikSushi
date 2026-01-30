@@ -18,6 +18,7 @@ export default function Navbar() {
   const [showBranchModal, setShowBranchModal] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isBookingPanelOpen, setIsBookingPanelOpen] = useState(false);
+  const [isOrderPanelOpen, setIsOrderPanelOpen] = useState(false);
   const [hasVisited, setHasVisited] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -38,6 +39,21 @@ export default function Navbar() {
     },
     {
       label: "Book At Wakefield",
+      href: "https://mimik-sushi-wakefield.resos.com/booking",
+    },
+  ];
+
+  const orderOptions = [
+    {
+      label: "Order from Acton",
+      href: "https://order.toasttab.com/online/mimik-sushi-acton",
+    },
+    {
+      label: "Order from Doncaster",
+      href: "https://mimik-sushi-doncaster.resos.com/booking",
+    },
+    {
+      label: "Order from Wakefield",
       href: "https://mimik-sushi-wakefield.resos.com/booking",
     },
   ];
@@ -238,6 +254,97 @@ export default function Navbar() {
         )}
       </AnimatePresence>
 
+      <AnimatePresence>
+        {isOrderPanelOpen && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsOrderPanelOpen(false)}
+              className="fixed inset-0 z-60 bg-black/50 backdrop-blur-sm"
+            />
+
+            {/* Sliding Panel */}
+            <motion.div
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{
+                type: "spring",
+                damping: 25,
+                stiffness: 200,
+              }}
+              className="fixed right-0 top-0 bottom-0 z-70 w-full max-w-md bg-white shadow-2xl"
+            >
+              <div className="h-full flex flex-col">
+                {/* Header */}
+                <div className="relative p-8 border-b border-black/10">
+                  <div className="absolute top-0 left-0 right-0 h-1 bg-linear-to-r from-[#c41e3a] to-[#d4af37]" />
+
+                  <button
+                    aria-label="close modal"
+                    onClick={() => setIsOrderPanelOpen(false)}
+                    className="absolute top-6 right-6 text-[#1a1a1a] hover:text-[#c41e3a] transition-colors duration-300"
+                  >
+                    <X className="w-6 h-6" />
+                  </button>
+
+                  <h2 className="font-serif text-3xl font-bold text-[#1a1a1a] mb-2 tracking-wide">
+                    Order Online
+                  </h2>
+                  <p className="text-[#4a5568] text-base">
+                    Choose your preferred location to order from
+                  </p>
+                </div>
+
+                {/* Booking Options */}
+                <div className="flex-1 p-8 space-y-4 overflow-y-auto">
+                  {orderOptions.map((option, index) => (
+                    <motion.a
+                      key={option.label}
+                      href={option.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      initial={{ opacity: 0, x: -30 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.1 + index * 0.1 }}
+                      className="block w-full bg-white border-2 border-black/50 hover:border-[#d4af37] rounded-sm p-6 text-left transition-all duration-300 hover:translate-x-2 hover:shadow-lg group relative overflow-hidden"
+                    >
+                      <div className="absolute inset-0 bg-linear-to-r from-transparent via-[#d4af37]/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-500" />
+                      <div className="flex items-center gap-4">
+                        <div>
+                          <h3 className="font-serif text-xl font-semibold text-[#1a1a1a] mb-1">
+                            {option.label}
+                          </h3>
+                          <span className="text-[#4a5568] text-sm">
+                            Click to proceed →
+                          </span>
+                        </div>
+                      </div>
+                    </motion.a>
+                  ))}
+                </div>
+
+                {/* Footer */}
+                <div className="p-8 border-t border-black/10">
+                  <p className="text-[#4a5568] text-sm text-center">
+                    Need help?{" "}
+                    <a
+                      href="/contact"
+                      className="text-[#c41e3a] hover:underline"
+                    >
+                      Contact us
+                    </a>
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+
       {/* Navbar */}
       <motion.nav
         initial={{ y: -100 }}
@@ -347,17 +454,31 @@ export default function Navbar() {
                     </motion.a>
                   ))}
 
-                  <motion.button
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.15 }}
-                    onClick={() => setIsBookingPanelOpen(true)}
-                    className="text-white px-7 py-3 rounded-full font-medium tracking-wider transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-[#c41e3a]/30 relative overflow-hidden group"
-                    style={{ backgroundColor: "#ff626d" }}
-                  >
-                    <span className="absolute inset-0 bg-white/20 rounded-full scale-0 group-hover:scale-100 transition-transform duration-500" />
-                    <span className="relative">Book Now</span>
-                  </motion.button>
+                  <div className="flex gap-4 w-full">
+                    <motion.button
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 0.15 }}
+                      onClick={() => setIsBookingPanelOpen(true)}
+                      className="w-1/2 text-white px-7 py-3 rounded-full font-medium tracking-wider transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-[#c41e3a]/30 relative overflow-hidden group"
+                      style={{ backgroundColor: "#ff626d" }}
+                    >
+                      <span className="absolute inset-0 bg-white/20 rounded-full scale-0 group-hover:scale-100 transition-transform duration-500" />
+                      <span className="relative">Book Now</span>
+                    </motion.button>
+
+                    <motion.button
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 0.15 }}
+                      onClick={() => setIsOrderPanelOpen(true)}
+                      className="w-1/2 text-white px-7 py-3 rounded-full font-medium tracking-wider transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-[#c41e3a]/30 relative overflow-hidden group"
+                      style={{ backgroundColor: "#ff626d" }}
+                    >
+                      <span className="absolute inset-0 bg-white/20 rounded-full scale-0 group-hover:scale-100 transition-transform duration-500" />
+                      <span className="relative">Reservation</span>
+                    </motion.button>
+                  </div>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -451,7 +572,20 @@ export default function Navbar() {
                   className="block w-full text-center text-white px-7 py-3 rounded-full font-medium tracking-wider transition-all duration-300 hover:shadow-lg hover:shadow-[#c41e3a]/30 mt-4"
                   style={{ backgroundColor: "#ff626d" }}
                 >
-                  Book Now
+                  Reservation
+                </motion.button>
+                <motion.button
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.2 }}
+                  onClick={() => {
+                    setIsOrderPanelOpen(true);
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className="block w-full text-center text-white px-7 py-3 rounded-full font-medium tracking-wider transition-all duration-300 hover:shadow-lg hover:shadow-[#c41e3a]/30 mt-4"
+                  style={{ backgroundColor: "#ff626d" }}
+                >
+                  Order Now
                 </motion.button>
               </div>
             </motion.div>

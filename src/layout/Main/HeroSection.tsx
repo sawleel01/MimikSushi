@@ -5,9 +5,37 @@ import { ArrowRight, Plus } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRef } from "react";
+import { useLocation } from "@/components/LocationContext";
+
+const LOCATION_ACTIONS = {
+  acton: {
+    giftCardUrl: "https://mimik-sushi-wakefield.resos.com/bookin",
+    orderUrl: "https://order.toasttab.com/online/mimik-sushi-doncaster",
+    reservationUrl: "https://order.toasttab.com/online/mimik-sushi-acton",
+  },
+  doncaster: {
+    giftCardUrl: "https://order.toasttab.com/egiftcards/mimik-sushi-doncaster",
+    orderUrl: "https://order.toasttab.com/online/mimik-sushi-doncaster",
+    reservationUrl: "https://mimik-sushi-doncaster.resos.com/booking",
+  },
+  wakefield: {
+    giftCardUrl: "https://mimik-sushi-wakefield.resos.com/bookin",
+    orderUrl: "https://order.toasttab.com/online/mimik-sushi-doncaster",
+    reservationUrl: "https://mimik-sushi-wakefield.resos.com/booking",
+  },
+};
 
 export default function SushiHero() {
   const heroRef = useRef<HTMLDivElement>(null);
+  const { location } = useLocation();
+
+  const key = location?.toLowerCase() as
+    | keyof typeof LOCATION_ACTIONS
+    | undefined;
+
+  const actions = LOCATION_ACTIONS[key ?? "doncaster"];
+
+  const locationName = location?.charAt(0).toUpperCase() + location?.slice(1);
 
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -125,7 +153,7 @@ export default function SushiHero() {
               transition={{ duration: 0.8, delay: 0.7 }}
               className="text-lg md:text-xl text-[#4a5568] leading-relaxed max-w-xl"
             >
-              Japanese cuisine with a Modern take
+              Japanese cuisine with a Modern take in {locationName}
             </motion.p>
 
             {/* Buttons */}
@@ -133,33 +161,50 @@ export default function SushiHero() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.9 }}
-              className="flex flex-wrap gap-4"
+              className="flex flex-wrap flex-col md:flex-row gap-3"
             >
               <motion.a
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
-                href="https://order.toasttab.com/egiftcards/mimik-sushi-doncaster"
-                className="group relative text-white px-8 py-4 rounded-full font-medium text-lg transition-all duration-300"
+                href={actions.giftCardUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative text-white px-6 py-4 rounded-full font-medium text-lg transition-all duration-300"
                 style={{ backgroundColor: "#ff626d" }}
               >
-                <span className="relative flex items-center gap-2">
+                <span className="relative flex items-center gap-2 justify-center">
                   Gift Cards
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </span>
               </motion.a>
 
-              <motion.button
+              <motion.a
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
-                className="group bg-white/80 backdrop-blur-sm border-2 border-[#1a1a1a] text-[#1a1a1a] px-8 py-4 rounded-full font-medium text-lg hover:bg-[#1a1a1a] hover:text-white transition-all duration-300 shadow-lg hover:shadow-xl"
+                href={actions.orderUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group bg-white/80 backdrop-blur-sm border-2 border-[#1a1a1a] text-[#1a1a1a] px-6 py-4 rounded-full font-medium text-lg hover:bg-[#1a1a1a] hover:text-white transition-all duration-300 shadow-lg hover:shadow-xl"
               >
-                <Link href="/menu">
-                  <span className="flex items-center gap-2">
-                    View Menu
-                    <Plus className="w-5 h-5 group-hover:rotate-90 transition-transform duration-300" />
-                  </span>
-                </Link>
-              </motion.button>
+                <span className="flex items-center gap-2 justify-center">
+                  Order Online
+                  <Plus className="w-5 h-5 group-hover:rotate-90 transition-transform duration-300" />
+                </span>
+              </motion.a>
+              <motion.a
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+                href={actions.reservationUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative text-white px-6 py-4 rounded-full font-medium text-lg transition-all duration-300"
+                style={{ backgroundColor: "#ff626d" }}
+              >
+                <span className="relative flex items-center gap-2 justify-center">
+                  Reservation
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </span>
+              </motion.a>
             </motion.div>
 
             {/* Stats */}

@@ -86,15 +86,8 @@ export default function LocationShowcase() {
             transition={{ duration: 0.7 }}
             className="relative group w-full"
           >
-            <div className="relative h-[500px] lg:h-[650px] w-full rounded-3xl overflow-hidden shadow-2xl">
-              <Image
-                src="/images/Doncaster/6.png"
-                alt={data.title}
-                fill
-                className="object-cover group-hover:scale-110 transition-transform duration-700 rounded-3xl"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                priority
-              />
+            <div className="relative h-125 lg:h-163 w-full rounded-3xl overflow-hidden shadow-2xl">
+              <img src={data.image} className="w-full h-full object-cover" />
 
               {/* Gradient Overlay */}
               <div className="absolute inset-0 bg-linear-to-t from-black/60 via-black/20 to-transparent" />
@@ -105,7 +98,7 @@ export default function LocationShowcase() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.3, duration: 0.5 }}
-                className="absolute top-6 left-6 bg-white/95 backdrop-blur-sm px-6 py-3 rounded-full shadow-lg border border-[#d4af37]/30 z-10"
+                className="absolute bottom-6 left-24 bg-white/95 backdrop-blur-sm px-6 py-3 rounded-full shadow-lg border border-[#d4af37]/30 z-10"
               >
                 <div className="flex items-center gap-2">
                   <MapPin className="w-5 h-5 text-[#c41e3a]" />
