@@ -140,7 +140,7 @@ export default function SignatureDishes() {
         </motion.div>
 
         {/* Dishes Carousel */}
-        <div className="relative">
+        <div className="relative mb-6">
           {/* Navigation Buttons */}
           <div className="absolute top-1/2 -translate-y-1/2 left-0 right-0 z-20 pointer-events-none">
             <div className="max-w-425 mx-auto px-4 flex justify-between">
@@ -204,7 +204,7 @@ export default function SignatureDishes() {
                         </span>
                       </div>
                       {/* Overlay on Hover */}
-                      <motion.div
+                      {/* <motion.div
                         initial={{ opacity: 0 }}
                         whileHover={{ opacity: 1 }}
                         transition={{ duration: 0.3 }}
@@ -218,7 +218,7 @@ export default function SignatureDishes() {
                         >
                           View Details
                         </motion.div>
-                      </motion.div>
+                      </motion.div> */}
                     </motion.div>
 
                     {/* Decorative Corner Element */}
@@ -238,33 +238,6 @@ export default function SignatureDishes() {
               ))}
             </motion.div>
           </motion.div>
-
-          {/* Progress Indicators */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.6 }}
-            className="flex justify-center gap-2 mt-12"
-          >
-            {Array.from({ length: Math.max(1, dishes.length - 3) }).map(
-              (_, index) => (
-                <button
-                  aria-label="slide"
-                  key={index}
-                  onClick={() => setCurrentSlide(index)}
-                  className="group relative"
-                >
-                  <div
-                    className={`h-1 rounded-full transition-all duration-300 ${
-                      currentSlide === index
-                        ? "w-12 bg-[#ff626d]"
-                        : "w-8 bg-[#1a1a1a]/20 group-hover:bg-[#1a1a1a]/40"
-                    }`}
-                  />
-                </button>
-              ),
-            )}
-          </motion.div>
         </div>
 
         {/* Bottom CTA */}
@@ -278,6 +251,7 @@ export default function SignatureDishes() {
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.98 }}
             className="inline-flex items-center gap-3 px-10 py-4 bg-[#ff626d] text-white rounded-full font-medium tracking-wide transition-all duration-300 hover:shadow-lg hover:shadow-[#ff626d]/30 group relative overflow-hidden"
+            style={{ backgroundColor: "#ff626d" }}
           >
             <span className="relative z-10">View Full Menu</span>
             <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300 relative z-10" />

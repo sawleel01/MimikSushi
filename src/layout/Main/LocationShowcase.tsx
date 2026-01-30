@@ -15,12 +15,6 @@ const LOCATION_DATA = {
     address: "123 High Street, Acton, London W3 6RS",
     phone: "+44 20 1234 5678",
     hours: "Mon-Sun: 12:00 PM - 10:30 PM",
-    features: [
-      "Private Dining Rooms",
-      "Outdoor Seating",
-      "Sake Bar",
-      "Omakase Experience",
-    ],
   },
   doncaster: {
     image: "/images/Doncaster/6.png",
@@ -30,12 +24,6 @@ const LOCATION_DATA = {
     address: "456 Market Place, Doncaster DN1 1NW",
     phone: "+44 130 2345 6789",
     hours: "Mon-Sun: 11:30 AM - 10:00 PM",
-    features: [
-      "Chef's Counter",
-      "Wine Pairing",
-      "Sushi Making Classes",
-      "Family Friendly",
-    ],
   },
   wakefield: {
     image: "/images/Doncaster/6.png",
@@ -54,7 +42,7 @@ export default function LocationShowcase() {
   const data = LOCATION_DATA[key as keyof typeof LOCATION_DATA];
 
   return (
-    <section className="relative py-24 lg:py-32 bg-[#f8f6f0] overflow-hidden">
+    <section className="relative py-24 lg:py-32 bg-white">
       {/* Background decorative elements */}
       <div className="absolute inset-0 opacity-30">
         <div className="absolute top-1/4 right-0 w-96 h-96 bg-[#d4af37]/10 rounded-full blur-3xl" />
@@ -96,17 +84,20 @@ export default function LocationShowcase() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            className="relative group"
+            className="relative group w-full"
           >
-            <div className="relative h-[500px] lg:h-[650px] w-[500px] rounded-3xl shadow-2xl">
+            <div className="relative h-[500px] lg:h-[650px] w-full rounded-3xl overflow-hidden shadow-2xl">
               <Image
-                src={data.image}
+                src="/images/Doncaster/6.png"
                 alt={data.title}
                 fill
-                className="object-cover group-hover:scale-110 transition-transform duration-700"
+                className="object-cover group-hover:scale-110 transition-transform duration-700 rounded-3xl"
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 priority
               />
+
+              {/* Gradient Overlay */}
+              <div className="absolute inset-0 bg-linear-to-t from-black/60 via-black/20 to-transparent" />
 
               {/* Floating Badge */}
               <motion.div
@@ -114,7 +105,7 @@ export default function LocationShowcase() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.3, duration: 0.5 }}
-                className="absolute top-6 left-6 bg-white/95 backdrop-blur-sm px-6 py-3 rounded-full shadow-lg border border-[#d4af37]/30"
+                className="absolute top-6 left-6 bg-white/95 backdrop-blur-sm px-6 py-3 rounded-full shadow-lg border border-[#d4af37]/30 z-10"
               >
                 <div className="flex items-center gap-2">
                   <MapPin className="w-5 h-5 text-[#c41e3a]" />
@@ -123,6 +114,10 @@ export default function LocationShowcase() {
                   </span>
                 </div>
               </motion.div>
+
+              {/* Corner Decorations */}
+              <div className="absolute top-6 right-6 w-12 h-12 border-t-2 border-r-2 border-white/60 rounded-tr-2xl z-10" />
+              <div className="absolute bottom-6 left-6 w-12 h-12 border-b-2 border-l-2 border-white/60 rounded-bl-2xl z-10" />
             </div>
 
             {/* Decorative Elements */}
@@ -205,6 +200,18 @@ export default function LocationShowcase() {
 
             {/* CTA Buttons */}
             <div className="flex flex-wrap gap-4 pt-4">
+              <motion.a
+                href="/menu"
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-medium tracking-wider transition-all duration-300 shadow-lg hover:shadow-xl group relative overflow-hidden"
+                style={{ backgroundColor: "#ff626d", color: "white" }}
+              >
+                <span className="absolute inset-0 bg-white/20 rounded-full scale-0 group-hover:scale-100 transition-transform duration-500" />
+                <span className="relative">View Menu</span>
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </motion.a>
+
               <motion.a
                 href="/gallery"
                 whileHover={{ scale: 1.05, y: -2 }}

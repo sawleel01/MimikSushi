@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { Variants } from "framer-motion";
 import Image from "next/image";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, X } from "lucide-react";
 import { useLocation } from "@/components/LocationContext";
 
 const containerVariants: Variants = {
@@ -60,6 +60,19 @@ const GALLERY_IMAGES = {
     "/images/doncaster/11.png",
     "/images/doncaster/12.png",
     "/images/doncaster/13.png",
+    "/images/doncaster/14.png",
+    "/images/doncaster/15.png",
+    "/images/doncaster/16.png",
+    "/images/doncaster/17.png",
+    "/images/doncaster/18.png",
+    "/images/doncaster/19.png",
+    "/images/doncaster/20.png",
+    "/images/doncaster/21.png",
+    "/images/doncaster/22.png",
+    "/images/doncaster/23.png",
+    "/images/doncaster/24.png",
+    "/images/doncaster/25.png",
+    "/images/doncaster/26.png",
   ],
   wakefield: [
     "/images/wakefield/1.png",
@@ -142,7 +155,7 @@ export default function GalleryHero() {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          key={`${location}-${page}`} // Re-animate when location or page changes
+          key={`${location}-${page}`} 
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12"
         >
           {currentImages.map((img) => (
@@ -270,19 +283,7 @@ export default function GalleryHero() {
               onClick={() => setActiveImage(null)}
               className="absolute top-6 right-6 z-10 bg-white/10 hover:bg-white/20 backdrop-blur-sm p-3 rounded-full transition-all duration-300 hover:rotate-90"
             >
-              <svg
-                className="w-6 h-6 text-white"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
+              <X className="w-6 h-6 text-white" />
             </motion.button>
 
             <motion.img
@@ -295,16 +296,6 @@ export default function GalleryHero() {
               className="max-w-full max-h-[90vh] rounded-3xl shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             />
-
-            {/* Location Badge in Modal */}
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="absolute top-20 left-1/2 -translate-x-1/2 bg-white/10 backdrop-blur-md px-6 py-2 rounded-full border border-white/20"
-            >
-              <span className="text-white font-medium">{locationName}</span>
-            </motion.div>
 
             {/* Keyboard Hints */}
             <motion.div
